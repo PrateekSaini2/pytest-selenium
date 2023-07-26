@@ -8,10 +8,16 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 @pytest.fixture(params=['Chrome', 'Firefox'], scope='function')
 def setup_driver(request):
     if request.param == 'Chrome':
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver = webdriver.Chrome(
+            service=ChromeService(
+            ChromeDriverManager().install()
+            ))
         print('Setting up Chrome')
     if request.param == 'Firefox':
-        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        driver = webdriver.Firefox(
+            service=FirefoxService(
+            GeckoDriverManager().install()
+            ))
         print('Setting up Firefox')
 
     driver.get('https://www.saucedemo.com/')
