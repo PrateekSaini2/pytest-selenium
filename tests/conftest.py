@@ -20,9 +20,10 @@ def setup_driver(request):
     #         ))
     #     print('Setting up Firefox')
 
+    chrome_options = webdriver.ChromeOptions()
     driver = webdriver.Remote(
            command_executor='http://127.0.0.1:4444/wd/hub',
-           desired_capabilities={'browserName': 'chrome', 'javascriptEnabled': True})
+           options=chrome_options)
 
     driver.get('https://www.saucedemo.com/')
     request.cls.driver = driver
