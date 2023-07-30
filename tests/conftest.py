@@ -22,8 +22,9 @@ def setup_driver(request):
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--incognito")
     driver = webdriver.Remote(
-           command_executor='http://localhost:4444/wd/hub',
+           command_executor='http://localhost:4444',
            options=chrome_options)
 
     driver.get('https://www.saucedemo.com/')
