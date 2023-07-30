@@ -14,10 +14,10 @@ jobs:
     steps:
     #   This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code
       - uses: actions/checkout@v3
-      # - name: Set up Python $3.11
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: 3.11
+      - name: Set up Python $3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
       - name: Set up Selenium Grid
         run: docker-compose up -d --scale chrome=5 --scale firefox=0
       - name : check status of grid
@@ -45,16 +45,12 @@ jobs:
               echo "Timeout: The Grid was not started within $max_wait_time_in_seconds seconds."
               exit 1
           fi
-      - name: Wait for Selenium Grid to be up
+      - name: Install dependencies
         run: |
-          while [ "$(curl -s -o /dev/null -w ''%{http_code}'' http:localhost:4444/wd/hub/status)" != "200" ]; do sleep 1; done
-      # - name: Install dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install ruff pytest
-      #     if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      # - name: Test with pytest
-      #   run: pytest
-      # - name: Stop Docker
-      #   run: docker-compose down
+          python -m pip install --upgrade pip
+          pip install ruff pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        run: pytest
+      - name: Stop Docker
+        run: docker-compose down
