@@ -5,7 +5,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
-@pytest.fixture(params=['Chrome', 'Firefox'], scope='function')
+@pytest.fixture(scope='function')
 def setup_driver(request):
     # if request.param == 'Chrome':
     #     driver = webdriver.Chrome(
@@ -21,8 +21,9 @@ def setup_driver(request):
     #     print('Setting up Firefox')
 
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless=new")
     driver = webdriver.Remote(
-           command_executor='http://127.0.0.1:4444/wd/hub',
+           command_executor='http://localhost:4444/wd/hub',
            options=chrome_options)
 
     driver.get('https://www.saucedemo.com/')
