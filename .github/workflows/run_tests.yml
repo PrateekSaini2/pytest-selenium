@@ -22,7 +22,7 @@ jobs:
         run: docker-compose up -d --scale chrome=5 --scale firefox=0
       - name : check status of grid
         run: |
-          echo $(curl -s -o /dev/null -w ''%{http_code}'' http:localhost:4444/status)
+          echo $(curl GET 'http://localhost:4444/status')
       - name: Wait for Selenium Grid to be up
         run: |
           while [ "$(curl -s -o /dev/null -w ''%{http_code}'' http:localhost:4444/wd/hub/status)" != "200" ]; do sleep 1; done
