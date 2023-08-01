@@ -23,9 +23,10 @@ jobs:
           python-version: 3.11
       - name: Set up Allure CLI
         run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update 
-          sudo apt-get install allure
+          sudo apt-get install default-jre
+          wget https://github.com/allure-framework/allure2/releases/download/2.18.1/allure_2.18.1-1_all.deb
+          sudo dpkg -i allure_2.18.1-1_all.deb
+          allure --version
       - name: Set up Selenium Grid
         run: docker-compose up -d --scale chrome=4 --scale firefox=0
       - name : Check Grid Status
