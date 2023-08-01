@@ -63,7 +63,7 @@ jobs:
           SAUCE_PROBLEM_USER_NAME: ${{ secrets.SAUCE_PROBLEM_USER_NAME }}
           SAUCE_VALID_PASSWORD: ${{ secrets.SAUCE_VALID_PASSWORD }}
           SAUCE_VALID_USER_NAME: ${{ secrets.SAUCE_VALID_USER_NAME }}
-        run: pytest -n 4 --alluredir=/tmp/allure-results
+        run: pytest -n 4 --alluredir=tmp/allure-results
       - name: Generate Allure Report
         run: |
           allure generate tmp/allure-results -o tmp/allure-report
