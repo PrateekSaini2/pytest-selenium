@@ -1,21 +1,16 @@
-# The name of the workflow as it will appear in the "Actions" tab of the GitHub repository.
 name: run-selenium-tests
-# The name for workflow runs generated from the workflow, which will appear in the list of workflow runs on your repository's "Actions" tab.
 run-name: ${{ github.actor }} is learning GitHub Actions
-# Specifies the trigger for this workflow. 
 on: 
   push:
   schedule:
     - cron: '30 11 * * 1-5'
-# Groups together all the jobs that run in the workflow.
+
 jobs:
-  # Defines a job
   run-tests:
     runs-on: ubuntu-latest
-    # Groups together all the steps that run in the job
+    environment: staging
     
     steps:
-    #   This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code
       - uses: actions/checkout@v3
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
@@ -75,5 +70,5 @@ jobs:
         with:
           name: allure-report
           path: tmp/allure-report/complete.html
-      - name: Download test report artifacts
-        uses: actions/download-artifact@v3
+      # - name: Download test report artifacts
+      #   uses: actions/download-artifact@v3

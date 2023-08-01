@@ -1,6 +1,7 @@
 import os
 import pytest
 from selenium.webdriver.common.by import By
+import allure
 from tests.test_base import TestBase
 
 class TestLogin(TestBase):
@@ -17,6 +18,7 @@ class TestLogin(TestBase):
         (performance_glitch_user, password)
         ])
     def test_login(self, username, password):
+        allure.attach('Test for user: ' + username)
         self.driver.find_element(By.ID, "user-name").send_keys(username)
         self.driver.find_element(By.ID, "password").send_keys(password)
         self.driver.find_element(By.ID, "login-button").click()
