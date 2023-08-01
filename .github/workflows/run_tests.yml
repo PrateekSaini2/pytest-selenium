@@ -54,6 +54,6 @@ jobs:
           SAUCE_PROBLEM_USER_NAME: ${{ secrets.SAUCE_PROBLEM_USER_NAME }}
           SAUCE_VALID_PASSWORD: ${{ secrets.SAUCE_VALID_PASSWORD }}
           SAUCE_VALID_USER_NAME: ${{ secrets.SAUCE_VALID_USER_NAME }}
-        run: pytest -s -v -n 4
+        run: pytest -v -n 4
       - name: Stop Docker
         run: docker-compose down

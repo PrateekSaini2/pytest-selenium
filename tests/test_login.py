@@ -5,12 +5,13 @@ from tests.test_base import TestBase
 
 class TestLogin(TestBase):
     locked_user = os.environ.get("SAUCE_LOCKED_USER_NAME", "locked_out_user")
+    password = os.environ.get("SAUCE_VALID_PASSWORD")
     
     @pytest.mark.parametrize('username, password', [
-        ('standard_user', 'secret_sauce'), 
-        ('locked_out_user', 'secret_sauce'), 
-        ('problem_user', 'secret_sauce'), 
-        ('performance_glitch_user', 'secret_sauce')]
+        ('standard_user', password), 
+        ('locked_out_user', password), 
+        ('problem_user', password), 
+        ('performance_glitch_user', password)]
         )
     def test_login(self, username, password):
         print(os.getenv("SAUCE_PERFORMANCE_USER_NAME"))
